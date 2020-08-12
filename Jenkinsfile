@@ -6,6 +6,7 @@ pipeline {
           stach 'git push'
           allowEmpty true
           excludes '.git'
+          sh 'echo "HEJ MED DIG"'
         }
     }
     stage('Say Hello') {
