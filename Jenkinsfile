@@ -1,6 +1,13 @@
 pipeline {
   agent any
   stages {
+    stage('clone down'){
+        steps{
+          stach 'git push'
+          allowEmpty true
+          excludes '.git'
+        }
+    }
     stage('Say Hello') {
       parallel {
         stage('Parallel execution') {
