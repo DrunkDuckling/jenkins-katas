@@ -3,6 +3,8 @@ pipeline {
   stages {
     stage('clone down'){
         steps{
+          unstash(name: 'git push')
+
           stash (
           name: 'git push',
           allowEmpty: true,
@@ -32,6 +34,7 @@ pipeline {
             sh 'ls'
             deleteDir()
             sh 'ls'
+            skipDefaultCheckout(true)
           }
         }
 
