@@ -3,10 +3,11 @@ pipeline {
   stages {
     stage('clone down'){
         steps{
-          stash 
+          stash (
           name: 'git push',
           allowEmpty: true,
           excludes: '.git'
+          )
           sh 'echo "HEJ MED DIG"'
         }
     }
