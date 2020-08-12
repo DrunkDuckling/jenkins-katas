@@ -3,16 +3,15 @@ pipeline {
   stages {
     stage('clone down'){
         steps{
-          unstash(name: 'code')
-
           stash (
-          name: 'git push',
+          name: 'code',
           allowEmpty: true,
           excludes: '.git'
           )
           sh 'echo "HEJ MED DIG"'
         }
     }
+  
     stage('Say Hello') {
       parallel {
         stage('Parallel execution') {
@@ -35,6 +34,11 @@ pipeline {
             deleteDir()
             sh 'ls'
             skipDefaultCheckout(true)
+          }
+        }
+        stage('unstash'){
+          steps{
+            unstash 'code'
           }
         }
 
