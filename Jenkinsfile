@@ -1,5 +1,5 @@
 pipeline {
-  enviroment{
+  environment {
     docker_username: 'drunkduckling'
   }
   agent any
