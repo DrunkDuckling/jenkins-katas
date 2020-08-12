@@ -11,7 +11,6 @@ pipeline {
           sh 'echo "HEJ MED DIG"'
         }
     }
-  
     stage('Say Hello') {
       parallel {
         stage('Parallel execution') {
@@ -25,7 +24,6 @@ pipeline {
             docker {
               image 'gradle:jdk11'
             }
-
           }
           steps {
             sh 'ci/build-app.sh'
@@ -34,11 +32,19 @@ pipeline {
             deleteDir()
             sh 'ls'
             skipDefaultCheckout(true)
+            unstash 'code'
           }
         }
-        stage('unstash'){
-          steps{
+        stage('test app'){
+          agent {
+            docker {
+              image 'gradle:jdk11'
+            }
+          }
+          steps {
             unstash 'code'
+            sh 'ci/unit-test-app.sh'
+            junit 'app/build/test-results/test/TEST-*.xml'
           }
         }
 
