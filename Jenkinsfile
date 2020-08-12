@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    docker_username: drunkduckling
+    docker_username = 'drunkduckling'
   }
   agent any
   stages {
